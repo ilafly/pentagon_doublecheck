@@ -141,12 +141,14 @@ solutions_up_to_iso:=function(solutions,n)
 end;
 
 construct_solutions_up_to_iso:=function(n)
-  local possible_rows, S, T, solutions;
+  local possible_rows, S, T, solutions, t0, t1, mytime, f;
+  t0 := NanosecondsSinceEpoch();
+  LogTo(Concatenation("log/pentagon", String(n), ".log"));
   solutions:=[];
   possible_rows:=Tuples([1..n],n);
-  for S in Tuples(possible_rows, n) do
+  for S in IteratorOfTuples(possible_rows, n) do
     if is_a_semigroup(S,n) = true then
-      for T in Tuples(possible_rows, n) do
+      for T in IteratorOfTuples(possible_rows, n) do
         if is_a_solution(S,T,n) = true then
           if solutions =[] then
             Add(solutions,[S,T]);
@@ -157,5 +159,13 @@ construct_solutions_up_to_iso:=function(n)
       od;
     fi;
   od;
+  f := IO_File(Concatenation("data/pentagon", String(n), ".g"), "w");
+  IO_WriteLine(f, Concatenation("sols:=", String(solutions)));
+  IO_Flush(f);
+  IO_Close(f);
+  t1 := NanosecondsSinceEpoch();
+  mytime := Int(Float((t1-t0)/10^6));
+  Print("I constructed ", Size(solutions), " solutions in ", mytime, "ms (=", StringTime(mytime), ")\n");
+  LogTo();
   return solutions;
 end;

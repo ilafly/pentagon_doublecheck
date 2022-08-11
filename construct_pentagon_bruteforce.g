@@ -140,6 +140,7 @@ solutions_up_to_iso:=function(solutions,n)
   return up_to_iso;
 end;
 
+
 construct_solutions_up_to_iso:=function(n)
   local possible_rows, S, T, solutions, t0, t1, mytime, f;
   t0 := NanosecondsSinceEpoch();

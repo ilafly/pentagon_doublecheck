@@ -34,6 +34,22 @@ is_a_semigroup:=function(S,n)
   return true;
 end;
 
+is_homomorphis:=function(f,S1,S2,n)
+  local x,y;
+  for x in [1..n] do
+    for y in [1..n] do
+      if not S1[x^f][y^f] = (S2[x][y])^f then
+        return false;
+      fi;
+    od;
+  od;
+  return true;
+end;
+
+are_isomorphic_semigroups:=function(S1,S2,n)
+  return true in List(SymmetricGroup(n), f->is_homomorphis(f,S1,S2,n));
+end;
+
 # For a given S and T check if it is a solution
 is_a_solution:=function(S,T,n)
   local t;
@@ -105,11 +121,11 @@ end;
 is_already_in_the_list:=function(sol, up_to_iso,n)
   local sol2;
   for sol2 in up_to_iso do
-    if isomorphism_solutions(sol[1],sol[2],sol2[1],sol2[2],n) then
+    if isomorphism_solutions(sol[1],sol[2],sol2[1],sol2[2],n) = true then
       return true;
     fi;
-    return false;
   od;
+  return false;
 end;
 
 solutions_up_to_iso:=function(solutions,n)

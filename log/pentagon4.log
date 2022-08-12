@@ -1,0 +1,18 @@
+Error, user interrupt in
+  tup[i] := l; at /usr/local/Cellar/gap/4.11.0/libexec/lib/combinat.gi:965 called from 
+TuplesK( set, k - 1, tup, i + 1 ) at /usr/local/Cellar/gap/4.11.0/libexec/lib/combinat.gi:966 called from
+TuplesK( set, k - 1, tup, i + 1 ) at /usr/local/Cellar/gap/4.11.0/libexec/lib/combinat.gi:966 called from
+TuplesK( set, k, [  ], 1 ) at /usr/local/Cellar/gap/4.11.0/libexec/lib/combinat.gi:975 called from
+Tuples( [ 1 .. n ], 3 ) at construct_pentagon_bruteforce.g:56 called from
+is_a_solution( S, T, n ) at construct_pentagon_bruteforce.g:153 called from
+...  at *stdin*:1
+you can 'return;'
+brk> quit;
+gap> S:=[[1,1,1,1],[1,1,1,1],[1,1,1,1],[1,1,1,1]];
+[ [ 1, 1, 1, 1 ], [ 1, 1, 1, 1 ], [ 1, 1, 1, 1 ], [ 1, 1, 1, 1 ] ]
+gap> Read("construct_pentagon_bruteforce.g");
+gap> construct_solutions_given_semigroup_up_to_iso(semi, 4, 1);
+Error, Variable: 'semi' must have a value
+not in any function at *stdin*:3
+gap> construct_solutions_given_semigroup_up_to_iso(S, 4, 1);
+#I  Already logging to log/pentagon4.log
